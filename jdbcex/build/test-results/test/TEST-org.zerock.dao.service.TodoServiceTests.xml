@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.zerock.dao.service.TodoServiceTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-06-22T07:13:06" hostname="Moons-MacBook-Air.local" time="0.208">
+  <properties/>
+  <testcase name="getTest()" classname="org.zerock.dao.service.TodoServiceTests" time="0.208"/>
+  <system-out><![CDATA[16:13:06.237 [Test worker] INFO  org.zerock.jdbcex.service.TodoService - tno: 12
+16:13:06.355 [Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariCP pool HikariPool-0 is starting.
+16:13:06.427 [Test worker] INFO  org.zerock.dao.service.TodoServiceTests - getTest -----------
+16:13:06.427 [Test worker] INFO  org.zerock.dao.service.TodoServiceTests - TodoDTO(tno=12, title=JDBC Test Title, dueDate=2023-06-21, finished=false)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
