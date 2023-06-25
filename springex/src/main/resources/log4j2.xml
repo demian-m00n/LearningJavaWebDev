@@ -4,7 +4,7 @@
     <Appenders>
         <!--콘솔-->
             <Console name="console" target="SYSTEM_OUT">
-                <PatterLayout charset="UTF-8" pattern="%d{hh:mm:ss} %5p [%c] %m%n"/>
+                <PatternLayout charset="UTF-8" pattern="%d{hh:mm:ss} %5p [%c] %m%n"/>
             </Console>
     </Appenders>
 
