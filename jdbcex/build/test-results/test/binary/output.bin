@@ -1,4 +1,0 @@
-Q16:13:06.237 [Test worker] INFO  org.zerock.jdbcex.service.TodoService - tno: 12
-n16:13:06.355 [Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariCP pool HikariPool-0 is starting.
-_16:13:06.427 [Test worker] INFO  org.zerock.dao.service.TodoServiceTests - getTest -----------
-–16:13:06.427 [Test worker] INFO  org.zerock.dao.service.TodoServiceTests - TodoDTO(tno=12, title=JDBC Test Title, dueDate=2023-06-21, finished=false)
