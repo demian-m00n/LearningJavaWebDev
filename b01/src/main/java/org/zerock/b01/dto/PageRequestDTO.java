@@ -56,7 +56,7 @@ public class PageRequestDTO {
                 } catch (UnsupportedEncodingException e){
                 }
             }
-            link = builder().toString();
+            link = builder.toString();
         }
         return link;
     }
