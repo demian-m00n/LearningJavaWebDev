@@ -54,10 +54,38 @@
       </div><!-- end card-->
     </div><!-- end col-->
   </div><!-- end row -->
+
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <div class="my-4">
+        <button class="btn btn-info addReplyBtn">ADD REPLY</button>
+      </div>
+      <ul class="list-group replyList">
+      </ul>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <ul class="pagination replyPaging">
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/js/reply.js"></script>
 </div>
 
 <script layout:fragment="script" th:inline="javascript">
+  const bno = [[${dto.bno}]]
 
+  function printReplies(page,size,goLast){
 
+    getList({bno,page,size,goLast}).then(
+            data => {console.log(data)}
+    ).catch(e => {
+      console.error(e)
+    })
+  }
 
+  printReplies(1,10)
 </script>
