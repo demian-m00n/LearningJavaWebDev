@@ -7,10 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.zerock.b01.domain.Board;
-import org.zerock.b01.dto.BoardDTO;
-import org.zerock.b01.dto.BoardListReplyCountDTO;
-import org.zerock.b01.dto.PageRequestDTO;
-import org.zerock.b01.dto.PageResponseDTO;
+import org.zerock.b01.dto.*;
 import org.zerock.b01.repository.BoardRepository;
 
 import javax.transaction.Transactional;
@@ -28,7 +25,7 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public Long register(BoardDTO boardDTO){
-        Board board = modelMapper.map(boardDTO , Board.class);
+        Board board = dtoToEntity(boardDTO);
 
         Long bno = boardRepository.save(board).getBno();
 
@@ -41,7 +38,7 @@ public class BoardServiceImpl implements BoardService{
 
         Board board = result.orElseThrow();
 
-        BoardDTO boardDTO = modelMapper.map(board , BoardDTO.class);
+        BoardDTO boardDTO = entityToDTO(board);
 
         return boardDTO;
     }
@@ -53,6 +50,15 @@ public class BoardServiceImpl implements BoardService{
         Board board = result.orElseThrow();
 
         board.change(boardDTO.getTitle(), boardDTO.getContent());
+
+        board.clearImages();
+
+        if (boardDTO.getFileNames() != null){
+            for (String fileName : boardDTO.getFileNames()){
+                String[] arr = fileName.split("_");
+                board.addImage(arr[0],arr[1]);
+            }
+        }
 
         boardRepository.save(board);
     }
@@ -91,6 +97,21 @@ public class BoardServiceImpl implements BoardService{
                 .searchWithReplyCount(types,keyword,pageable);
 
         return PageResponseDTO.<BoardListReplyCountDTO>wihAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(result.getContent())
+                .total((int)result.getTotalElements())
+                .build();
+    }
+
+    @Override
+    public PageResponseDTO<BoardListAllDTO> listWithAll(PageRequestDTO pageRequestDTO){
+        String[] types = pageRequestDTO.getTypes();
+        String keyword = pageRequestDTO.getKeyword();
+        Pageable pageable = pageRequestDTO.getPageable("bno");
+
+        Page<BoardListAllDTO> result = boardRepository.searchWithAll(types,keyword,pageable);
+
+        return PageResponseDTO.<BoardListAllDTO>wihAll()
                 .pageRequestDTO(pageRequestDTO)
                 .dtoList(result.getContent())
                 .total((int)result.getTotalElements())
