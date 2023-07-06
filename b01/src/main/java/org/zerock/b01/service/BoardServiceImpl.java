@@ -34,7 +34,7 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public BoardDTO readOne(Long bno){
-        Optional<Board> result = boardRepository.findById(bno);
+        Optional<Board> result = boardRepository.findByIdWithImages(bno);
 
         Board board = result.orElseThrow();
 

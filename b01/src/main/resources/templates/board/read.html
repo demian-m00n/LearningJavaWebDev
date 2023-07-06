@@ -45,12 +45,20 @@
                 <a th:href="|@{/board/list}?${link}|" class="text-decoration-none">
                 <button type="button" class="btn btn-primary">List</button>
                 </a>
-                <a th:href="|@{/board/modify}?${link}|" class="text-decoration-none">
+                <a th:href="|@{/board/modify(bno=${dto.bno})}&${link}|" class="text-decoration-none">
                 <button type="button" class="btn btn-secondary">Modify</button>
                 </a>
             </div>
           </div>
         </div><!--end card body-->
+
+        <div class="col">
+          <div class="card" th:if="${dto.fileNames != null && dto.fileNames.size() > 0}">
+            <img class="card-img-top"
+            th:each="fileName : ${dto.fileNames}" th:src="|/view/${fileName}|">
+          </div>
+        </div>
+
       </div><!-- end card-->
     </div><!-- end col-->
   </div><!-- end row -->
@@ -96,7 +104,7 @@
       </div>
     </div>
   </div>
-  <!-- end regist modal -->
+  <!-- end register modal -->
 
 
   <div class="modal modifyModal" tabindex="-1">
