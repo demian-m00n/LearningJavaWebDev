@@ -7,8 +7,10 @@ xmlns:th="http://www.thymeleaf.org">
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
-    <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}"/>
-    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
 </head>
 <body class="align-middle">
 <div class="container-fluid d-flex justify-content-center" style="height: 100vh">
@@ -17,14 +19,23 @@ xmlns:th="http://www.thymeleaf.org">
             LOGIN Page
         </div>
         <div class="card-body">
-            <form action="/member/login" id="registerForm" method="post">
+            <th:block th:if="${param.logout != null}">
+                <h1>Logout.................</h1>
+            </th:block>
+            <form action="/member/login" id="registerForm" method="post" th:if="${param.logout == null}">
                 <div class="input-group mb-3">
                     <span class="input-group-text">아이디</span>
                     <input type="text" name="username" class="form-control" placeholder="USER ID">
                 </div>
-                <div class="input-group">
+                <div class="input-group mb-3">
                     <span class="input-group-text">패스워드</span>
                     <input type="password" name="password" class="form-control" placeholder="PASSWORD">
+                </div>
+                <div class="input-group mb-3">
+                    <input type="checkbox" class="form-check-input" name="remember-me">
+                    <label class="form-check-label">
+                        자동로그인
+                    </label>
                 </div>
                 <div class="my-4">
                     <div class="float-end">
@@ -32,6 +43,9 @@ xmlns:th="http://www.thymeleaf.org">
                     </div>
                 </div>
             </form>
+            <div>
+                <a href="/oauth2/authorization/kakao">KAKAO</a>
+            </div>
         </div>
     </div>
 </div>
